@@ -17,10 +17,10 @@ public class CalculateRewardsService {
 	private static final Logger logger = LoggerFactory.getLogger(CalculateRewardsService.class);
 
 	@Value("${over100.reward.points}")
-	private int over100_rewardPoints;
+	private int over100_rewardPointsValue;
 
 	@Value("${between50and100.reward.points}")
-	private int between50and100_rewardPoints;
+	private int between50and100_rewardPointsValue;
 
 	/**
 	 * Calculates reward points for a list of customers.
@@ -37,7 +37,8 @@ public class CalculateRewardsService {
 			int totalPoints = 0;
 
 			/**
-			 * Calculates and combine reward points for each month transactions for all customers.
+			 * Calculates and combine reward points for each month transactions for all
+			 * customers.
 			 */
 			for (Transactions transaction : customer.getTransactions()) {
 				int points = calculatePointsPerMonth(transaction.getPurchaseAmount());
@@ -67,7 +68,8 @@ public class CalculateRewardsService {
 		int totalPoints = 0;
 
 		/**
-		 * Calculates and combine reward points for each month transactions per customer.
+		 * Calculates and combine reward points for each month transactions per
+		 * customer.
 		 */
 		for (Transactions transaction : customer.getTransactions()) {
 			int points = calculatePointsPerMonth(transaction.getPurchaseAmount());
@@ -97,7 +99,7 @@ public class CalculateRewardsService {
 		 * 2 points for every dollar spent over $100 in each transaction.
 		 */
 		if (amount > 100) {
-			points += (((amount - 100) * over100_rewardPoints));
+			points += (((amount - 100) * over100_rewardPointsValue));
 			amount = 100;
 
 		}
@@ -106,7 +108,7 @@ public class CalculateRewardsService {
 		 * 1 point for every dollar spent between $50 and $100 in each transaction.
 		 */
 		if (amount > 50) {
-			points += ((amount - 50) * between50and100_rewardPoints);
+			points += ((amount - 50) * between50and100_rewardPointsValue);
 		}
 
 		return points;
