@@ -2,10 +2,9 @@ package com.customer_reward.app.controller;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,12 +55,14 @@ public class CalculateRewardsController {
 		if (customerId == null) {
 			throw new CustomerNotFoundException("Requested customer id is null");
 		}
+		// Reading data sets
 		List<Customers> customers = getSampleData();
 
+		// Retrieving customer id
 		Customers customer = customers.stream().filter(c -> c.getCustomerId().equals(customerId)).findFirst()
 				.orElseThrow(() -> new CustomerNotFoundException(
 						"Requested customer id is  not found. Customer ID: " + customerId));
-
+		// Calling reward calculation method
 		Map<String, Map<String, Integer>> customerRewards = calculateRewardsService
 				.calculateRewardsForCustomer(customer);
 		return new ResponseEntity<>(customerRewards, HttpStatus.OK);
@@ -74,6 +75,8 @@ public class CalculateRewardsController {
 	 * @return a list of sample customers with transactions.
 	 */
 	private List<Customers> getSampleData() {
+
+		// Data sets for demonstration
 		Customers customer1 = new Customers();
 		customer1.setCustomerId(10);
 		customer1.setCustomerName("James Brown");

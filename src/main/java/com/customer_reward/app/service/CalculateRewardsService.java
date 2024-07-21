@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.customer_reward.app.model.Customers;
@@ -15,6 +16,19 @@ import com.customer_reward.app.model.Transactions;
 public class CalculateRewardsService {
 	private static final Logger logger = LoggerFactory.getLogger(CalculateRewardsService.class);
 
+	@Value("${over100.reward.points}")
+	private int over100_rewardPoints;
+
+	@Value("${between50and100.reward.points}")
+	private int between50and100_rewardPoints;
+
+	/**
+	 * Calculates reward points for a list of customers.
+	 *
+	 * @param customers the list of customers
+	 * @return a map with customer names as keys and their monthly reward points as
+	 *         values
+	 */
 	public Map<String, Map<String, Integer>> calculateRewards(List<Customers> customers) {
 		Map<String, Map<String, Integer>> rewards = new HashMap<>();
 
@@ -22,6 +36,9 @@ public class CalculateRewardsService {
 			Map<String, Integer> monthlyPoints = new HashMap<>();
 			int totalPoints = 0;
 
+			/**
+			 * Calculates and combine reward points for each month transactions for all customers.
+			 */
 			for (Transactions transaction : customer.getTransactions()) {
 				int points = calculatePointsPerMonth(transaction.getPurchaseAmount());
 				totalPoints += points;
@@ -49,6 +66,9 @@ public class CalculateRewardsService {
 		Map<String, Integer> monthlyPoints = new HashMap<>();
 		int totalPoints = 0;
 
+		/**
+		 * Calculates and combine reward points for each month transactions per customer.
+		 */
 		for (Transactions transaction : customer.getTransactions()) {
 			int points = calculatePointsPerMonth(transaction.getPurchaseAmount());
 			totalPoints += points;
@@ -63,17 +83,30 @@ public class CalculateRewardsService {
 		return perCustomerRewards;
 	}
 
+	/**
+	 * Calculates reward points based on the purchase amount.
+	 *
+	 * @param amount the purchase amount
+	 * @return the calculated reward points
+	 */
 	private int calculatePointsPerMonth(double amount) {
+
 		int points = 0;
 
+		/**
+		 * 2 points for every dollar spent over $100 in each transaction.
+		 */
 		if (amount > 100) {
-			points += (((amount - 100) * 2));
+			points += (((amount - 100) * over100_rewardPoints));
 			amount = 100;
 
 		}
 
+		/**
+		 * 1 point for every dollar spent between $50 and $100 in each transaction.
+		 */
 		if (amount > 50) {
-			points += (amount - 50);
+			points += ((amount - 50) * between50and100_rewardPoints);
 		}
 
 		return points;
