@@ -1,6 +1,6 @@
-Customer Rewards Project
+<h1>Customer Rewards Project</h1>
 
-Overview
+<h3>Overview:</h3>
 
 The Customer Rewards Project is a Spring Boot application designed to calculate and manage reward points for customers based on their transactions. The rewards are calculated based on specific rules, where customers earn:
 
@@ -8,7 +8,7 @@ The Customer Rewards Project is a Spring Boot application designed to calculate 
 
 1 point for every dollar spent between $50 and $100 in each transaction.
 
-Features
+<h3>Features:</h3>
 
 Calculate Rewards: Calculate rewards points for all customers or a specific customer.
 
@@ -16,7 +16,7 @@ Error Handling: Handles exceptions such as customer not found.
 
 Sample Data: Provides sample customer and transaction data for testing purposes.
 
-API Endpoints
+<h3>API Endpoints</h3>
 
 Get Rewards for All Customers
 Endpoint: /customers/rewards
