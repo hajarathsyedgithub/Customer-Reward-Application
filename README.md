@@ -23,54 +23,70 @@ Endpoint: /customers/rewards
 
 Method: GET
 
-Description: Fetches reward points data for all customers, categorized by month and total rewards.
+<h3>Description:</h3> Fetches reward points data for all customers, categorized by month and total rewards.
 
-Response Example: { "James Brown": { "JANUARY": 140, "Total Rewards": 140 }, "Michael Phelps": { "JANUARY": 50, "Total Rewards": 50 }, "Robert Williams": { "FEBRUARY": 300, "MARCH": 10, "Total Rewards": 310 }, "Linda Hamilton": { "JANUARY": 200, "FEBRUARY": 300, "MARCH": 400, "Total Rewards": 900 } }
+<h3>Response Example:</h3>
+{ "James Brown": { "JANUARY": 140, "Total Rewards": 140 }, 
+
+"Michael Phelps": { "JANUARY": 50, "Total Rewards": 50 }, 
+
+"Robert Williams": { "FEBRUARY": 300, "MARCH": 10, "Total Rewards": 310 }, 
+
+"Linda Hamilton": { "JANUARY": 200, "FEBRUARY": 300, "MARCH": 400, "Total Rewards": 900 }
+
+}
+
+
 
 Get Rewards for a Specific Customer
+
 Endpoint: /customers/rewards/{customerId}
 
 Method: GET
 
-Description: Fetches reward points data for a specific customer by their ID.
+<h3>Description:</h3> Fetches reward points data for a specific customer by their ID.
 
 Path Parameter:
 
 customerId (Integer): The ID of the customer.
 
-Response Example: { "Linda Hamilton": { "JANUARY": 200, "FEBRUARY": 300, "MARCH": 400, "Total Rewards": 900 } }
+<h3>Response Example:</h3>
+{ "Linda Hamilton": { "JANUARY": 200, "FEBRUARY": 300, "MARCH": 400, "Total Rewards": 900 } }
 
-Error Responses
+
+<h3>Error Responses</h3>
 
 Customer Not Found:
 
 Status Code: 404 Not Found { "error": "Requested customer id is not found. Customer ID: {customerId}" }
 
-Internal Server Error:
+<h3>Internal Server Error:</h3>
 
 Status Code: 500 Internal Server Error
 
-Response Example: { "error": "An unexpected error occurred." }
+<h3>Response Example:</h3>
+{ "error": "An unexpected error occurred." }
 
-Exception Handling
+<h3>Exception Handling</h3>
 
 The application includes global exception handling to provide meaningful error messages and avoid exposing sensitive details.
 
-Global Exception Handler
+<h3>Global Exception Handler</h3>
 
 Exception Handled: Exception
 
-Response:
+<h3>Response:</h3>
 
 Error Message: "An unexpected error occurred."
 
 Customer Not Found Exception
 
-Exception Handled: CustomerNotFoundException
+<h3>Exception Handled:</h3> CustomerNotFoundException
 
-Response:
+<h3>Response:</h3>
 
 Error Message: "Requested customer id is not found. Customer ID: {customerId}"
+
 
 Getting Started
 
