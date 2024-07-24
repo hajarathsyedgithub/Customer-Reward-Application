@@ -68,4 +68,15 @@ public class GlobalExceptionHandler {
 		errorResponse.put("error", ex.getMessage());
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
+
+	@ExceptionHandler(CustomerDataException.class)
+	public ResponseEntity<Map<String, String>> handleCustomerDataException(CustomerDataException ex,
+			WebRequest request) {
+		logger.error("Customer data error: {}", ex.getMessage(), ex);
+
+		// Create a detailed error response
+		Map<String, String> errorResponse = new HashMap<>();
+		errorResponse.put("error", ex.getMessage());
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+	}
 }

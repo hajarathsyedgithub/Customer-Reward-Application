@@ -1,12 +1,13 @@
 package com.customer_reward.app.exception;
 
-public class CustomerNotFoundException extends RuntimeException {
+public class CustomerDataException extends RuntimeException {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3444117705985287858L;
 
-	public CustomerNotFoundException(String message) {
+	public CustomerDataException(String message) {
 		super(message);
 	}
+
 }
